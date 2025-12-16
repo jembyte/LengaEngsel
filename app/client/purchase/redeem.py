@@ -137,12 +137,12 @@ def settlement_bounty(
         "x-signature": x_sig,
         "x-request-id": str(uuid.uuid4()),
         "x-request-at": java_like_timestamp(x_requested_at),
-        "x-version-app": "8.9.0",
+        "x-version-app": "8.9.1",
     }
     
     url = f"{BASE_API_URL}/{path}"
     print("Sending bounty request...")
-    resp = requests.post(url, headers=headers, data=json.dumps(body), timeout=30)
+    resp = requests.post(url, headers=headers, data=json.dumps(body), timeout=60, verify=False)
     
     try:
         decrypted_body = decrypt_xdata(api_key, json.loads(resp.text))
@@ -214,12 +214,12 @@ def settlement_loyalty(
         "x-signature": x_sig,
         "x-request-id": str(uuid.uuid4()),
         "x-request-at": java_like_timestamp(x_requested_at),
-        "x-version-app": "8.9.0",
+        "x-version-app": "8.9.1",
     }
 
     url = f"{BASE_API_URL}/{path}"
     print("Sending loyalty request...")
-    resp = requests.post(url, headers=headers, data=json.dumps(body), timeout=30)
+    resp = requests.post(url, headers=headers, data=json.dumps(body), timeout=60, verify=False)
     
     try:
         decrypted_body = decrypt_xdata(api_key, json.loads(resp.text))
@@ -291,12 +291,12 @@ def bounty_allotment(
         "x-signature": x_sig,
         "x-request-id": str(uuid.uuid4()),
         "x-request-at": java_like_timestamp(x_requested_at),
-        "x-version-app": "8.9.0",
+        "x-version-app": "8.9.1",
     }
     
     url = f"{BASE_API_URL}/{path}"
     print("Sending bounty request...")
-    resp = requests.post(url, headers=headers, data=json.dumps(body), timeout=30)
+    resp = requests.post(url, headers=headers, data=json.dumps(body), timeout=60, verify=False)
     
     try:
         decrypted_body = decrypt_xdata(api_key, json.loads(resp.text))

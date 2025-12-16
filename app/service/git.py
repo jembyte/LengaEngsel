@@ -2,8 +2,8 @@ import subprocess
 import requests
 import xml.etree.ElementTree as ET
 
-OWNER = "purplemashu"
-REPO  = "me-cli-sunset"
+OWNER = "jembyte"
+REPO  = "LengaEngsel"
 BRANCH = "main"
 
 def get_local_commit():

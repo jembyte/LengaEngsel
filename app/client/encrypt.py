@@ -65,15 +65,15 @@ def load_ax_fp() -> str:
     
     # Generate new if not found/empty
     dev = DeviceInfo(
-        manufacturer="samsung" + str(randint(1000, 9999)),
-        model="SM-N93" + str(randint(1000, 9999)),
+        manufacturer="motorola",
+        model="moto g45 5G",
         lang="en",
-        resolution="720x1540",
+        resolution="720x1600",
         tz_short="GMT07:00",
-        ip="192.169.69.69",
+        ip="192.168.1." + str(randint(1, 255)),
         font_scale=1.0,
-        android_release="13",
-        msisdn="6281398370564"
+        android_release="15",
+        msisdn="6281234567890"
     )
     
     new_fp = ax_fingerprint(dev, AX_FP_KEY)

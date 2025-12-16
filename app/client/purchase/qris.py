@@ -165,12 +165,12 @@ def settlement_qris(
         "x-signature": x_sig,
         "x-request-id": str(uuid.uuid4()),
         "x-request-at": java_like_timestamp(x_requested_at),
-        "x-version-app": "8.9.0",
+        "x-version-app": "8.9.1",
     }
     
     url = f"{BASE_API_URL}/{path}"
     print("Sending settlement request...")
-    resp = requests.post(url, headers=headers, data=json.dumps(body), timeout=30)
+    resp = requests.post(url, headers=headers, data=json.dumps(body), timeout=60, verify=False)
     
     try:
         decrypted_body = decrypt_xdata(api_key, json.loads(resp.text))
@@ -254,7 +254,7 @@ def show_qris_payment(
     qr.print_ascii(invert=True)
     
     qris_b64 = base64.urlsafe_b64encode(qris_code.encode()).decode()
-    qris_url = f"https://ki-ar-kod.netlify.app/?data={qris_b64}"
+    qris_url = f"https://drawqr.kwalski.workers.dev/?data={qris_b64}"
     
     print(f"Atau buka link berikut untuk melihat QRIS:\n{qris_url}")
     

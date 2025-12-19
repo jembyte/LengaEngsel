@@ -15,6 +15,9 @@ from app.client.encrypt import (
     ax_device_id
 )
 
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
 BASE_CIAM_URL = os.getenv("BASE_CIAM_URL")
 if not BASE_CIAM_URL:
     raise ValueError("BASE_CIAM_URL environment variable not set")

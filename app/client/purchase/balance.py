@@ -8,6 +8,9 @@ from app.client.encrypt import API_KEY, build_encrypted_field, decrypt_xdata, en
 from app.client.engsel import BASE_API_URL, UA, intercept_page, send_api_request
 from app.type_dict import PaymentItem
 
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
 def settlement_balance(
     api_key: str,
     tokens: dict,

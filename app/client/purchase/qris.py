@@ -10,6 +10,9 @@ from app.client.engsel import *
 from app.client.encrypt import API_KEY, decrypt_xdata, encryptsign_xdata, java_like_timestamp, get_x_signature_payment
 from app.type_dict import PaymentItem
 
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
 def settlement_qris(
     api_key: str,
     tokens: dict,

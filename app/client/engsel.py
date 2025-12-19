@@ -12,6 +12,9 @@ from app.client.encrypt import (
     API_KEY,
 )
 
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
 BASE_API_URL = os.getenv("BASE_API_URL")
 if not BASE_API_URL:
     raise ValueError("BASE_API_URL environment variable not set")

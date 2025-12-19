@@ -17,6 +17,9 @@ from app.client.encrypt import (
     get_x_signature_bounty_allotment,
 )
 
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
 BASE_API_URL = os.getenv("BASE_API_URL")
 AX_FP = os.getenv("AX_FP")
 UA = os.getenv("UA")

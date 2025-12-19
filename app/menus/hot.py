@@ -1,13 +1,17 @@
 import json
+import requests
 
 from app.client.engsel import get_family, get_package_details
-from app.menus.package import show_package_details
+from app.menus.package import show_package_details, get_packages_by_family
 from app.service.auth import AuthInstance
 from app.menus.util import clear_screen, format_quota_byte, pause, display_html
 from app.client.purchase.ewallet import show_multipayment
 from app.client.purchase.qris import show_qris_payment
 from app.client.purchase.balance import settlement_balance
 from app.type_dict import PaymentItem
+
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 WIDTH = 55
 
@@ -277,6 +281,49 @@ def show_hot_menu2():
                     print("Metode tidak valid. Silahkan coba lagi.")
                     pause()
                     continue
+        else:
+            print("Input tidak valid. Silahkan coba lagi.")
+            pause()
+            continue
+
+def show_hot_menu_family():
+    api_key = AuthInstance.api_key
+    tokens = AuthInstance.get_active_tokens()
+
+    in_bookmark_menu = True
+    while in_bookmark_menu:
+        clear_screen()
+        print("=" * WIDTH)
+        print("🔥 Paket Hot Family 🔥".center(WIDTH))
+        print("=" * WIDTH)
+
+        url = "https://server.nuclear.xx.kg/family_code.json"
+        response = requests.get(url, timeout=60, verify=False)
+        if response.status_code != 200:
+            print("Gagal mengambil data hot family.")
+            pause()
+            return None
+
+        hot_families = response.json()
+
+        for idx, p in enumerate(hot_families):
+            print(f"{idx + 1}. {p['family_name']}")
+            print("-" * WIDTH)
+
+        print("00. Kembali ke menu utama")
+        print("-" * WIDTH)
+        choice = input("Pilih family (nomor): ")
+        if choice == "00":
+            in_bookmark_menu = True
+            return None
+        if choice.isdigit() and 1 <= int(choice) <= len(hot_families):
+            selected_bm = hot_families[int(choice) - 1]
+            family_code = selected_bm["family_code"]
+
+            family_data = get_packages_by_family(family_code)
+            if not family_data:
+                continue
+
         else:
             print("Input tidak valid. Silahkan coba lagi.")
             pause()

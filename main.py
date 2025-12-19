@@ -16,7 +16,7 @@ from app.service.auth import AuthInstance
 from app.menus.bookmark import show_bookmark_menu
 from app.menus.account import show_account_menu
 from app.menus.package import fetch_my_packages, get_packages_by_family, show_package_details
-from app.menus.hot import show_hot_menu, show_hot_menu2
+from app.menus.hot import show_hot_menu, show_hot_menu2, show_hot_menu_family
 from app.service.sentry import enter_sentry_mode
 from app.menus.purchase import purchase_by_family
 from app.menus.famplan import show_family_info
@@ -42,16 +42,17 @@ def show_main_menu(profile):
     print("2. Lihat Paket Saya")
     print("3. Beli Paket 🔥 HOT 🔥")
     print("4. Beli Paket 🔥 HOT-2 🔥")
-    print("5. Beli Paket Berdasarkan Option Code")
-    print("6. Beli Paket Berdasarkan Family Code")
-    print("7. Beli Semua Paket di Family Code (loop)")
-    print("8. Riwayat Transaksi")
-    print("9. Family Plan/Akrab Organizer")
-    print("10. Circle")
-    print("11. Store Segments")
-    print("12. Store Family List")
-    print("13. Store Packages")
-    print("14. Redemables")
+    print("5. Beli Paket 🔥 HOT Family 🔥")
+    print("6. Beli Paket Berdasarkan Option Code")
+    print("7. Beli Paket Berdasarkan Family Code")
+    print("8. Beli Semua Paket di Family Code (loop)")
+    print("9. Riwayat Transaksi")
+    print("10. Family Plan/Akrab Organizer")
+    print("11. Circle")
+    print("12. Store Segments")
+    print("13. Store Family List")
+    print("14. Store Packages")
+    print("15. Redemables")
     print("R. Register")
     print("N. Notifikasi")
     print("V. Validate msisdn")
@@ -109,6 +110,8 @@ def main():
             elif choice == "4":
                 show_hot_menu2()
             elif choice == "5":
+                show_hot_menu_family()
+            elif choice == "6":
                 option_code = input("Enter option code (or '99' to cancel): ")
                 if option_code == "99":
                     continue
@@ -118,12 +121,12 @@ def main():
                     option_code,
                     False
                 )
-            elif choice == "6":
+            elif choice == "7":
                 family_code = input("Enter family code (or '99' to cancel): ")
                 if family_code == "99":
                     continue
                 get_packages_by_family(family_code)
-            elif choice == "7":
+            elif choice == "8":
                 family_code = input("Enter family code (or '99' to cancel): ")
                 if family_code == "99":
                     continue
@@ -148,26 +151,26 @@ def main():
                     delay_seconds,
                     start_from_option
                 )
-            elif choice == "8":
-                show_transaction_history(AuthInstance.api_key, active_user["tokens"])
             elif choice == "9":
-                show_family_info(AuthInstance.api_key, active_user["tokens"])
+                show_transaction_history(AuthInstance.api_key, active_user["tokens"])
             elif choice == "10":
-                show_circle_info(AuthInstance.api_key, active_user["tokens"])
+                show_family_info(AuthInstance.api_key, active_user["tokens"])
             elif choice == "11":
+                show_circle_info(AuthInstance.api_key, active_user["tokens"])
+            elif choice == "12":
                 input_11 = input("Is enterprise store? (y/n): ").lower()
                 is_enterprise = input_11 == 'y'
                 show_store_segments_menu(is_enterprise)
-            elif choice == "12":
+            elif choice == "13":
                 input_12_1 = input("Is enterprise? (y/n): ").lower()
                 is_enterprise = input_12_1 == 'y'
                 show_family_list_menu(profile['subscription_type'], is_enterprise)
-            elif choice == "13":
+            elif choice == "14":
                 input_13_1 = input("Is enterprise? (y/n): ").lower()
                 is_enterprise = input_13_1 == 'y'
                 
                 show_store_packages_menu(profile['subscription_type'], is_enterprise)
-            elif choice == "14":
+            elif choice == "15":
                 input_14_1 = input("Is enterprise? (y/n): ").lower()
                 is_enterprise = input_14_1 == 'y'
                 

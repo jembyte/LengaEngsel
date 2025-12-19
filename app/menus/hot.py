@@ -19,7 +19,7 @@ def show_hot_menu():
     while in_bookmark_menu:
         clear_screen()
         print("=" * WIDTH)
-        print("🔥 Paket  Hot 🔥".center(WIDTH))
+        print("🔥 Paket Hot 🔥".center(WIDTH))
         print("=" * WIDTH)
         
         hot_packages = []
@@ -79,7 +79,7 @@ def show_hot_menu2():
         clear_screen()
         main_package_detail = {}
         print("=" * WIDTH)
-        print("🔥 Paket  Hot 2 🔥".center(WIDTH))
+        print("🔥 Paket Hot 2 🔥".center(WIDTH))
         print("=" * WIDTH)
         
         hot_packages = []
